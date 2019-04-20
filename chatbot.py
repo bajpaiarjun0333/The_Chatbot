@@ -126,3 +126,37 @@ answersints2word = {w_i:w for w,w_i in answerswords2int.items()}
 
 for i in range(len(clean_answers)):
     clean_answers[i]+=' <EOS>'
+
+#translating all the questions and answers
+questions_into_int =[]
+answers_into_int = []
+
+for question in clean_questions:
+    ints=[]
+    for word in question.split():
+        if word not in questionswords2int:
+            ints.append(questionswords2int['<OUT>'])
+        else:
+            ints.append(questionswords2int[word])
+    questions_into_int.append(ints)
+
+for answer in clean_answers:
+    ints=[]
+    for word in answer.split():
+        if word not in answerswords2int:
+            ints.append(answerswords2int['<OUT>'])
+        else:
+            ints.append(answerswords2int[word])
+    answers_into_int.append(ints)
+
+#sorting the questions and answers to make neural net understand
+    
+sorted_clean_questions=[]
+sorted_clean_answers=[]
+
+for length in range(1,25+1):
+    for i in enumerate(questions_into_int):
+        if len(i[1])==length:
+            sorted_clean_questions.append(questions_into_int[i[0]])
+            sorted_clean_answers.append(answers_into_int[i[0]])
+            
