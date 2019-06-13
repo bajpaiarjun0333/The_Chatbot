@@ -160,3 +160,13 @@ for length in range(1,25+1):
             sorted_clean_questions.append(questions_into_int[i[0]])
             sorted_clean_answers.append(answers_into_int[i[0]])
             
+#starting the art of tensorflow 
+            
+def inputs():
+    inputs=tf.placeholder(tf.int32,[None,None],name='input')
+    targets=tf.placeholder(tf.int32,[None,None],name='target')
+    lr=tf.placeholder(tf.float32,name='learning_rate')
+    keep_prob=tf.placeholder(tf.float32,name='keep_prob')
+    return inputs,targets,lr,keep_prob
+
+#preprocess the targets
